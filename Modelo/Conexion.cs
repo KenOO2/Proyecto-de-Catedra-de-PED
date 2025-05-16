@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Data;
 
 namespace Modelo
 {
@@ -7,17 +8,14 @@ namespace Modelo
         public static SqlConnection GetConexion()
         {
             SqlConnection SqlConexion;
-            string server = "localhost";
+            string server = "localhost  ";
             string database = "Codex";
             string user = "sa";
             string password = "123456";
-
+            
             try
             {
-                SqlConexion = new SqlConnection("server=" + server +
-                                                ";uid=" + user +
-                                                ";pwd=" + password +
-                                                ";database=" + database);
+                SqlConexion = new SqlConnection($"Server={server}; Database={database}; Integrated Security=True");
                 SqlConexion.Open();
                 return SqlConexion;
             }
@@ -26,5 +24,6 @@ namespace Modelo
                 return SqlConexion = null;
             }
         }
+
     }
 }

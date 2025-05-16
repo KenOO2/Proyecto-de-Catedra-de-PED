@@ -14,6 +14,7 @@ namespace Vista
 {
     public partial class principaladministrador : Form
     {
+        public static ListaEnlazada lista = new ListaEnlazada();
         public principaladministrador()
         {
             InitializeComponent();
@@ -135,14 +136,47 @@ namespace Vista
                 formulario.BringToFront();
             }
         }
-        private void btninventario_Click(object sender, EventArgs e)
+        private void btninventario_Click(object sender, EventArgs e) //Roni: cambie esta onda porque si entraba a inventario me quedaba stuck aca
         {
-            AbrirFormulario<Inventario>();
+            pnlcontenedorforms.Controls.Clear(); // Limpiar el panel completamente
+            Inventario formInventario = new Inventario();
+            formInventario.TopLevel = false;
+            formInventario.FormBorderStyle = FormBorderStyle.None;
+            formInventario.Dock = DockStyle.Fill;
+            pnlcontenedorforms.Controls.Add(formInventario);
+            formInventario.Show();
+
         }
 
         private void btnproveedores_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<Proveedores>();
+            pnlcontenedorforms.Controls.Clear(); // Limpiar el panel ANTES de agregar el formulario
+
+            Proveedores formproveedores = pnlcontenedorforms.Controls
+                .OfType<Proveedores>()
+                .FirstOrDefault();
+
+            if (formproveedores == null || formproveedores.IsDisposed)
+            {
+                formproveedores = new Proveedores();
+                formproveedores.TopLevel = false;
+                formproveedores.FormBorderStyle = FormBorderStyle.None;
+                formproveedores.Dock = DockStyle.Fill;
+
+                pnlcontenedorforms.Controls.Add(formproveedores);
+                formproveedores.Show();
+
+                formproveedores.CargarDatos();
+                formproveedores.ActualizarDatagrid();
+            }
+            else
+            {
+                formproveedores.Show();
+                formproveedores.CargarDatos();
+                formproveedores.ActualizarDatagrid();
+                formproveedores.Focus();
+            }
+
         }
     }
 

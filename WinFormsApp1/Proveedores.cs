@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista;
 
 namespace proyecto
 {
@@ -17,6 +18,7 @@ namespace proyecto
         public Proveedores()
         {
             InitializeComponent();
+            ActualizarDatagrid();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,9 +26,28 @@ namespace proyecto
             Modificación_de_Proveedores form = new Modificación_de_Proveedores();
             form.Show();
             this.Hide();
+
         }
-        public void ActualizarDataGrid()
+        public void ActualizarDatagrid()
         {
+            if (!this.Visible) // Asegurar que `FormProveedores` ya está visible antes de ejecutar
+                return;
+
+            dataGridView1.Rows.Clear(); // Limpiar las filas antes de actualizar
+
+            if (lista.nodos.Count == 0)
+            {
+                MessageBox.Show("No hay datos para mostrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            foreach (var nodo in lista.nodos)
+            {
+                var fila = new List<object> { nodo.ID };
+                fila.AddRange(nodo.Datos.Values);
+                dataGridView1.Rows.Add(fila.ToArray());
+            }
+
 
         }
 
@@ -34,12 +55,14 @@ namespace proyecto
         {
             CargarDatos();
 
+
         }
 
-        private void CargarDatos()
+        public void CargarDatos()
         {
             try
             {
+                lista.nodos.Clear();
                 using (SqlConnection conexion = Modelo.Conexion.GetConexion())
                 {
                     if (conexion == null)
@@ -48,7 +71,7 @@ namespace proyecto
                         return;
                     }
 
-                    string query = "SELECT IdProveedor, NomMarca, Email, TelProveedor, RegistroIva FROM Proveedores";
+                    string query = "SELECT DISTINCT IdProveedor, NomMarca, Email, TelProveedor, RegistroIva FROM Proveedores";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
                     {
@@ -60,11 +83,11 @@ namespace proyecto
 
                                 // lee el IdProducto 
                                 proveedor.ID = Convert.ToInt32(reader["IdProveedor"]);
-
+                                proveedor.Name = reader["NomMarca"].ToString();
 
                                 proveedor.Datos = new Dictionary<string, object>()
                     {
-                        {"Nombre", reader["NomMarca"].ToString() },
+                                    {"Nombre", reader["NomMarca"].ToString()  },
                         {"Email", reader["Email"].ToString()},
                         {"Telefono", reader["TelProveedor"].ToString() },
                        { "RegistroIVA", reader["RegistroIva"] != DBNull.Value ? reader["RegistroIva"].ToString() : "Sin Registro" }
@@ -138,11 +161,39 @@ namespace proyecto
                     }
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        
+
+        private void btnmodificar_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count > 0) //verificar que haya una fila seleccionada
+            {
+                int indiceseleccionado = dataGridView1  .SelectedRows [0].Index;
+
+                if(indiceseleccionado >= 0 && indiceseleccionado < lista.nodos.Count)
+                {
+                    //obtenes el proveedor seleccionado
+                    Nodo proovedorSeleccionado = lista.nodos[indiceseleccionado];
+
+
+                    //abrimos el form con los datos seleccionados
+                    Modificación_de_Proveedores modificar = new Modificación_de_Proveedores(proovedorSeleccionado);
+                    modificar.ShowDialog();
+
+                    CargarDatos();
+                    ActualizarDatagrid();
+                }
+
+  
+            }
+            else
+            {
+
+                MessageBox.Show("Seleccione un proveedor para modificar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }    
+        }
     }
 }

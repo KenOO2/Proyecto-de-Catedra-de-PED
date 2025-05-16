@@ -10,7 +10,7 @@ namespace proyecto
 {
     public class ListaEnlazada
     {
-        public List<Nodo> nodos;
+        public List<Nodo> nodos { get; private set; } = new List<Nodo>();
 
         public ListaEnlazada()
         {
@@ -19,14 +19,17 @@ namespace proyecto
 
         // Función para llenar el DataGridView
 
-        public void LlenarDataGridView(DataGridView dataGridView1) 
+        public void LlenarDataGridView(DataGridView dataGridView1)
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Columns.Clear();
 
             if (nodos.Count > 0)
             {
-                // Crear columnas dinámicamente a partir de los datos del primer nodo
+                // Agregar columnas para ID y Name
+                dataGridView1.Columns.Add("ID", "ID");
+
+                // Agregar columnas dinámicas a partir del diccionario Datos
                 foreach (var clave in nodos[0].Datos.Keys)
                 {
                     dataGridView1.Columns.Add(clave, clave);
@@ -35,11 +38,17 @@ namespace proyecto
                 // Llenar filas con los datos de los nodos
                 foreach (var nodo in nodos)
                 {
-                    var valores = new List<object>();
+                    var valores = new List<object>
+            {
+                nodo.ID, // Agregar el ID
+               
+            };
+
                     foreach (var valor in nodo.Datos.Values)
                     {
                         valores.Add(valor);
                     }
+
                     dataGridView1.Rows.Add(valores.ToArray());
                 }
             }
@@ -62,7 +71,7 @@ namespace proyecto
         }
 
         // Actualizar nodo por ID
-        public void ActualizarNodoPorID(int id, Dictionary<string, object> nuevosDatos)
+        public void ActualizarNodoPorID(int id, string name, Dictionary<string, object> nuevosDatos)
         {
             foreach (var nodo in nodos)
             {
@@ -75,9 +84,66 @@ namespace proyecto
         }
 
         // Buscar nodo por ID
-        public Nodo BuscarNodoPorID(int id)
+        public void BuscarNodoPorID(int id, DataGridView dgv)
         {
-            return nodos.Find(n => n.ID == id);
+            // Limpiar filas previas para mostrar solo el nodo encontrado
+            dgv.Rows.Clear();
+
+            Nodo nodo = nodos.Find(n => n.ID == id);
+            if (nodo != null && dgv != null)
+            {
+                var valores = new List<object>
+        {
+            nodo.ID, // Agregar el ID
+            nodo.Name // Agregar el Nombre
+        };
+
+                // Extraer los valores del diccionario y asegurarse de que coincidan con las columnas existentes
+                foreach (var clave in nodo.Datos.Keys)
+                {
+                    valores.Add(nodo.Datos[clave]);
+                }
+
+                // Agregar una nueva fila con los valores del nodo encontrado
+                dgv.Rows.Add(valores.ToArray());
+            }
+            else
+            {
+                MessageBox.Show("Nodo no encontrado o DataGridView es nulo.");
+            }
+
+        }
+
+        //Buscar nodo por Nombre
+        public void BuscarNodoPorNombre(string nombre, DataGridView dgv)
+        {
+            // Limpiar filas previas para mostrar solo el nodo encontrado
+            dgv.Rows.Clear();
+
+            Nodo nodo = nodos.Find(n => n.Name == nombre);
+
+
+            if (nodo != null && dgv != null)
+            {
+                var valores = new List<object>
+        {
+            nodo.ID, // Agregar el ID
+            nodo.Name // Agregar el Nombre
+        };
+
+                // Extraer los valores del diccionario y asegurarse de que coincidan con las columnas existentes
+                foreach (var clave in nodo.Datos.Keys)
+                {
+                    valores.Add(nodo.Datos[clave]);
+                }
+
+                // Agregar una nueva fila con los valores del nodo encontrado
+                dgv.Rows.Add(valores.ToArray());
+            }
+            else
+            {
+                MessageBox.Show("Nodo no encontrado o DataGridView es nulo.");
+            }
         }
 
         public void Vaciar()

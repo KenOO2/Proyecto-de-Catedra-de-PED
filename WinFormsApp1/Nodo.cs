@@ -12,11 +12,13 @@ namespace proyecto
     public class Nodo
     {
         public int ID { get; set; }  // ID ahora es de tipo int
+        public string Name { get; set; }
         public Dictionary<string, object> Datos { get; set; }
 
-        public Nodo(int id, Dictionary<string, object> datos)
+        public Nodo(int id, string name, Dictionary<string, object> datos)
         {
             ID = id;
+            Name = name;
             Datos = datos;
         }
 

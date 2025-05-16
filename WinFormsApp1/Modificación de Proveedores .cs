@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,17 +9,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace proyecto
 {
     public partial class Modificación_de_Proveedores : Form
     {
         private ListaEnlazada listaproveedores = new ListaEnlazada();
+        private Nodo proveedoractual; //si se agrega
+        private bool esModificacion; //si se modifica
+
         public Modificación_de_Proveedores()
         {
             InitializeComponent();
         }
+        public Modificación_de_Proveedores(Nodo proveedor)
+        {
+            InitializeComponent();
+            if (proveedor != null)
+            {
+                proveedoractual = proveedor;
+                cargarDatosProveedor();
+                esModificacion = true;
 
+                txtidprove.ReadOnly = true;
+                txtidprove.BackColor = Color.LightGray;
+                txtidprove.TabStop = false;
+
+            }
+        }
+        private void cargarDatosProveedor()
+        {
+            txtidprove.Text = proveedoractual.ID.ToString();
+            txtname.Text = proveedoractual.Datos["Nombre"].ToString().Trim() ;
+            txtemail.Text = proveedoractual.Datos["Email"].ToString().Trim();
+            txttelefono.Text = proveedoractual.Datos["Telefono"].ToString().Trim();
+            txtiva.Text = proveedoractual.Datos["RegistroIVA"].ToString().Trim();
+
+
+        }
         private void btnagg_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos())
@@ -56,23 +86,73 @@ namespace proyecto
                     {"Telefono", telefono},
                     {"RegistroIVA", RegistroIVA}
                 };
-
-                Nodo nuevoNodo = new Nodo
+                if(esModificacion) //si estamos modificando 
                 {
-                    ID = id,
-                    Datos = datos,
-                };
+                    proveedoractual.ID = id;
+                    proveedoractual.Datos = datos;
+                    ActualizarEnBD(proveedoractual);
+                    MessageBox.Show("Proveedor modificado correctamente");
+                }
+                else
+                {
+                    Nodo nuevonod = new Nodo { ID = id, Datos = datos };
+                    listaproveedores.AñadirNodo(nuevonod);
+                    GuardarEnBD(nuevonod);
+                    MessageBox.Show("Proveedor agregado correctamente");
+                }
 
-                listaproveedores.AñadirNodo(nuevoNodo);
-                GuardarEnBD(nuevoNodo);
-                MessageBox.Show("Proveedor agregado correctamente");
-                Proveedores prove = new Proveedores();
-                prove.Show();
-                this.Hide();
+                //Accede al form proveedores dentro del principal admin
+                Proveedores prove = (Proveedores)Application.OpenForms["Proveedores"];
+                if(prove != null)
+                {
+                    prove.CargarDatos();
+                    prove.ActualizarDatagrid();//actualiza los datos
+                    prove.Focus();//trae el form al frente
+                }
+                this.Close();//cierra el form agregar
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al agregar un proveedor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ActualizarEnBD(Nodo proveedor)
+        {
+            try
+            {
+                using (SqlConnection conexion = Modelo.Conexion.GetConexion())
+                {
+                    if (conexion == null)
+                    {
+                        MessageBox.Show("No se pudo establecer una conexion con la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    string query = "UPDATE Proveedores SET NomMarca = @Nombre, Email = @Email, TelProveedor = @Telefono, RegistroIva = @RegistroIVA WHERE IdProveedor = @ID";
+                    using (SqlCommand comandito = new SqlCommand(query, conexion))
+                    {
+                        // Convertimos los valores a los tipos correctos
+                        comandito.Parameters.AddWithValue("@ID", proveedor.ID);
+                        comandito.Parameters.AddWithValue("@Nombre", proveedor.Datos["Nombre"].ToString().PadRight(15)); // Asegura que coincida con VARCHAR(15)
+                        comandito.Parameters.AddWithValue("@Email", proveedor.Datos["Email"].ToString().PadRight(30)); // Asegura que coincida con VARCHAR(30)
+                        comandito.Parameters.AddWithValue("@Telefono", proveedor.Datos["Telefono"].ToString().PadRight(16)); // Asegura que coincida con CHAR(16)
+                        comandito.Parameters.AddWithValue("@RegistroIVA", proveedor.Datos["RegistroIVA"].ToString().PadRight(10)); // Asegura que coincida con CHAR(10)
+
+                        int FilasAfectadas = comandito.ExecuteNonQuery();
+
+                        if (FilasAfectadas > 0)
+                        {
+                            MessageBox.Show("Proveedor actualizado con exito", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo actualizar el proveedor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar al proveedor: " + ex.Message);
             }
         }
         private void GuardarEnBD(Nodo nodo)
@@ -101,7 +181,15 @@ namespace proyecto
         }
         private void btnvolver_Click(object sender, EventArgs e)
         {
-          
+            Proveedores probe = (Proveedores)Application.OpenForms["Proveedores"];
+
+            if(probe != null && !probe.IsDisposed)
+            {
+                probe.CargarDatos();
+                probe.ActualizarDatagrid();
+                probe.Show();
+                probe.Focus();
+            }
             this.Hide();
         }
 
