@@ -24,18 +24,21 @@ Nomproducto varchar(30) NOT NULL,
 IdProveedor int NOT NULL,
 Precio decimal(10,2) NOT NULL,
 Descuento int NOT NULL, --Entrada esperada:10, 50, 99 {(10/100) = 0.1 * precio = descuento }
+Stock int NOT NULL,
 FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor) ON DELETE CASCADE
 );
 
-
+ Drop Table Productos
+ --La tabla Productos fue modificada
+ 
 insert into Usuarios(id, Email, Nombre, Contraseña)
 values ('1','gab@gmail.com', 'Gabriel', '1234')
 
 insert into Proveedores(IdProveedor, NomMarca, Email, TelProveedor, RegistroIva)
 values ('1','adoc', 'pp@gmail.com', '121254545', '3')
 
-insert into Productos(IdProducto, Nomproducto, IdProveedor, Precio, Descuento)
-values ('1','Zapato deporte', '1', '12.8', '2')
+insert into Productos(IdProducto, Nomproducto, IdProveedor, Precio, Descuento, Stock)
+values ('1','Zapato deporte', '1', '12.8', '2',10)
 
 
 select * from Usuarios

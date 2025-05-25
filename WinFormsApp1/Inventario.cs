@@ -14,8 +14,11 @@ namespace proyecto
         public Inventario()
         {
             InitializeComponent();
+            txtBuscar.Enter += txtBuscar_Enter;
+            txtBuscar.Leave += txtBuscar_Leave;
 
         }
+        
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -26,9 +29,6 @@ namespace proyecto
 
                 Nodo nuevoProducto = new Nodo();
                 nuevoProducto.ID = idProducto;
-                //*------------------------------------------------------*
-                //Ahora el nodo tiene un atributo bombre y este ya no se coloca en dictionary
-                //*----------------------------------------------------------*
                 nuevoProducto.Name = nombreProducto;
 
                 // descuento sobre el precio
@@ -43,18 +43,19 @@ namespace proyecto
 
                 nuevoProducto.Datos = new Dictionary<string, object>()
                 {
-                {"IdProveedor", int.Parse(txtIDprovee.Text)},
                 {"Nombre", nombreProducto},
+                {"IdProveedor", int.Parse(txtIDprovee.Text)},
                 {"Precio", precio},
                 {"Descuento", descuento},
-                {"PrecioConDescuento", precioConDescuento}
+                {"PrecioConDescuento", precioConDescuento},
+                {"Stock", int.Parse(txtStock.Text) } // Agregar el stock
                 };
 
                 //agrega el nodo a la lista enlazada
                 listaProductos.AñadirNodo(nuevoProducto);
 
                 //insertar en la base de datos
-                InsertarProductoEnBaseDeDatos(idProducto, txtNomProducto.Text, int.Parse(txtIDprovee.Text), precio, descuento);
+                InsertarProductoEnBaseDeDatos(idProducto, txtNomProducto.Text, int.Parse(txtIDprovee.Text), precio, descuento, int.Parse(txtStock.Text));
 
                 //actualiza el datagridview
                 listaProductos.LlenarDataGridView(dataGridView1);
@@ -69,7 +70,7 @@ namespace proyecto
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        private void InsertarProductoEnBaseDeDatos(int idProducto, string nomProducto, int idProveedor, decimal precio, int descuento)
+        private void InsertarProductoEnBaseDeDatos(int idProducto, string nomProducto, int idProveedor, decimal precio, int descuento, int stock)
         {
             using (SqlConnection conexion = Modelo.Conexion.GetConexion())
             {
@@ -79,15 +80,16 @@ namespace proyecto
                     return;
                 }
 
-                string query = "INSERT INTO Productos (IdProducto, NomProducto, IdProveedor, Precio, Descuento) VALUES (@IdProducto, @NomProducto, @IdProveedor, @Precio, @Descuento)";
+                string query = "INSERT INTO Productos (IdProducto, NomProducto, IdProveedor, Precio, Descuento, Stock) VALUES (@IdProducto, @NomProducto, @IdProveedor, @Precio, @Descuento, @Stock)";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
-                    comando.Parameters.AddWithValue("@IdProducto", idProducto);  
+                    comando.Parameters.AddWithValue("@IdProducto", idProducto);
                     comando.Parameters.AddWithValue("@NomProducto", nomProducto);
                     comando.Parameters.AddWithValue("@IdProveedor", idProveedor);
                     comando.Parameters.AddWithValue("@Precio", precio);
                     comando.Parameters.AddWithValue("@Descuento", descuento);
+                    comando.Parameters.AddWithValue("@Stock", stock); // Agregar el stock
 
                     comando.ExecuteNonQuery();
                 }
@@ -96,7 +98,7 @@ namespace proyecto
 
         private void BtnEditar_Click(object sender, EventArgs e)
         {
- 
+
             try
             {
                 // validaciones
@@ -104,7 +106,8 @@ namespace proyecto
                     string.IsNullOrWhiteSpace(txtNomProducto.Text) ||
                     string.IsNullOrWhiteSpace(txtIDprovee.Text) ||
                     string.IsNullOrWhiteSpace(txtPrecio.Text) ||
-                    string.IsNullOrWhiteSpace(txtDescuento.Text))
+                    string.IsNullOrWhiteSpace(txtDescuento.Text) ||
+                    string.IsNullOrWhiteSpace(txtStock.Text))
                 {
                     MessageBox.Show("Todos los campos deben estar llenos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -116,6 +119,7 @@ namespace proyecto
                 int idProveedor = int.Parse(txtIDprovee.Text.Trim());
                 decimal precio = decimal.Parse(txtPrecio.Text.Trim());
                 int descuento = int.Parse(txtDescuento.Text.Trim());
+                int stock = int.Parse(txtStock.Text.Trim());
 
                 using (SqlConnection conexion = Modelo.Conexion.GetConexion())
                 {
@@ -124,6 +128,7 @@ namespace proyecto
                                  IdProveedor = @IdProveedor, 
                                  Precio = @Precio, 
                                  Descuento = @Descuento
+                                 Stock = @Stock
                              WHERE IdProducto = @IdProducto";
 
                     using (SqlCommand comando = new SqlCommand(query, conexion))
@@ -133,28 +138,27 @@ namespace proyecto
                         comando.Parameters.AddWithValue("@Precio", precio);
                         comando.Parameters.AddWithValue("@Descuento", descuento);
                         comando.Parameters.AddWithValue("@IdProducto", idProducto);
+                        comando.Parameters.AddWithValue("@Stock", stock); // Agregar el stock
 
                         int filasAfectadas = comando.ExecuteNonQuery();
 
-                       
+
                         if (filasAfectadas > 0)
                         {
                             MessageBox.Show("Producto actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //*-------------------------------------------------------------*
-                            //Actualizamos la lista si se pudo actualizar la bd
-                            //Actualizacion de la lista 
-
-
+                            
+                            //Actualizamos la lista si se pudo actualizar la bd 
                             decimal precioConDescuento = precio - (precio * descuento / 100);
                             Dictionary<string, object> NuevosDatos = new Dictionary<string, object>()
                             {
-                            {"IdProveedor", int.Parse(txtIDprovee.Text)},
                             {"Nombre", nomProducto},
+                            {"IdProveedor", int.Parse(txtIDprovee.Text)},
                             {"Precio", precio},
                             {"Descuento", descuento},
-                            {"PrecioConDescuento", precioConDescuento}
+                            {"PrecioConDescuento", precioConDescuento},
+                            {"Stock", stock } // Agregar el stock
                             };
-                            
+
                             try
                             {
                                 listaProductos.ActualizarNodoPorID(Convert.ToInt32(idProducto), nomProducto, NuevosDatos);
@@ -164,9 +168,6 @@ namespace proyecto
                             {
                                 MessageBox.Show("Error: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            //*------------------------------------------------------------------*
-
-
                             LimpiarCampos();
                         }
 
@@ -175,15 +176,11 @@ namespace proyecto
                             MessageBox.Show("No se encontró el producto para actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    
-                    
+
+
 
 
                 }
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("Formato incorrecto en alguno de los campos numéricos. Verifica los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -197,93 +194,42 @@ namespace proyecto
             txtIDprovee.Clear();
             txtPrecio.Clear();
             txtDescuento.Clear();
-        }
-
-        //*--------------------------------------------------------*
-        //El anterior boton editar descuento ya no se usara por lo tanto ahora se usa para buscar
-        //Editar el diseno a conveniencia si es necesario
-        //*--------------------------------------------------------*
-        private void BtnDescuento_Click(object sender, EventArgs e)
-        {
-            //Inserte validaciones de campos aqui
-            try
-            {
-                string id = txtIDProducto.Text;
-                string nom = txtNomProducto.Text.Trim();
-                if (txtIDProducto.Text != "") //Buscamor por id
-                {
-                    //Si el campo id esta lleno buscamos por id
-                    dataGridView1.Rows.Clear();
-                    listaProductos.BuscarNodoPorID(Convert.ToInt32(id), dataGridView1);
-                }
-                if(txtNomProducto.Text != "")//Buscamos por nombre
-                {
-                    dataGridView1.Rows.Clear();
-                    listaProductos.BuscarNodoPorNombre(nom, dataGridView1);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-            //*-------------------------------------------------------------------------------------------------------------*
-            //Por favor poner un boton para reinicir el DGV y que muestre toda la lista ya que aqui solo muestra el resultado
-            //*-------------------------------------------------------------------------------------------------------------*
-        }
-
-        //*---------------------------------------------------------------------------*
-        //Eliminar este metodo ya que el descuento se manejara con la edicion del producto
-        //*------------------------------------------------------------------------------*
-        private void ActualizarDescuentoEnBaseDeDatos(int idProducto, int descuento)
-        {
-            using (SqlConnection conexion = Modelo.Conexion.GetConexion())
-            {
-                if (conexion == null)
-                {
-                    MessageBox.Show("No se pudo establecer conexión con la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                string query = "UPDATE Productos SET Descuento = @Descuento WHERE IdProducto = @IdProducto";
-
-                using (SqlCommand comando = new SqlCommand(query, conexion))
-                {
-                    comando.Parameters.AddWithValue("@IdProducto", idProducto); 
-                    comando.Parameters.AddWithValue("@Descuento", descuento);
-
-                    comando.ExecuteNonQuery();
-                }
-            }
+            txtStock.Clear();
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult resultado = MessageBox.Show("¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (resultado == DialogResult.Yes)
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                try
                 {
-                    
-                    int idProducto = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["IdProducto"].Value);
+                    if (dataGridView1.SelectedRows.Count > 0)
+                    {
 
-                    // elimina el producto en la lista 
-                    listaProductos.EliminarNodoPorID(idProducto);
+                        int idProducto = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
 
-                    // elimina el producto en la base 
-                    EliminarProductoDeBaseDeDatos(idProducto);
 
-                    // se actualiza datagridview
-                    listaProductos.LlenarDataGridView(dataGridView1);
+                        // elimina el producto en la lista 
+                        listaProductos.EliminarNodoPorID(idProducto);
 
-                    MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // elimina el producto en la base 
+                        EliminarProductoDeBaseDeDatos(idProducto);
+
+                        // se actualiza datagridview
+                        listaProductos.LlenarDataGridView(dataGridView1);
+
+                        MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, seleccione un producto para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Por favor, seleccione un producto para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error: " + ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
             }
         }
         private void EliminarProductoDeBaseDeDatos(int idProducto)
@@ -300,13 +246,13 @@ namespace proyecto
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
-                    comando.Parameters.AddWithValue("@IdProducto", idProducto);  
+                    comando.Parameters.AddWithValue("@IdProducto", idProducto);
 
                     comando.ExecuteNonQuery();
                 }
             }
         }
-        
+
         private void CargarProductosDesdeBaseDeDatos()
         {
             using (SqlConnection conexion = Modelo.Conexion.GetConexion())
@@ -317,7 +263,7 @@ namespace proyecto
                     return;
                 }
 
-                string query = "SELECT IdProducto, NomProducto, IdProveedor, Precio, Descuento FROM Productos";
+                string query = "SELECT IdProducto, NomProducto, IdProveedor, Precio, Descuento , Stock FROM Productos";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
@@ -329,10 +275,7 @@ namespace proyecto
 
                             // lee el IdProducto 
                             producto.ID = Convert.ToInt32(reader["IdProducto"]);
-                            //*---------------------------------------------------*
-                            //Ahora el nombre se guarda aparte del dictionary
-                            //*----------------------------------------------------*
-                            producto.Name = reader["NomProducto"].ToString() ;
+                            producto.Name = reader["NomProducto"].ToString();
 
                             decimal precio = Convert.ToDecimal(reader["Precio"]);
 
@@ -345,11 +288,12 @@ namespace proyecto
 
                             producto.Datos = new Dictionary<string, object>()
                             {
-                            {"Nombre", reader["NomProducto"].ToString()},
+                            {"Nombre", reader["NomProducto"].ToString()},//Siempre se guarda como dato para mostrar
                             {"IdProveedor", Convert.ToInt32(reader["IdProveedor"])},
                             {"Precio", precio},
                             {"Descuento", descuento},
-                            {"PrecioConDescuento", precioConDescuento}
+                            {"PrecioConDescuento", precioConDescuento},
+                            {"Stock", Convert.ToInt32(reader["Stock"]) }
                             };
 
                             listaProductos.AñadirNodo(producto);
@@ -362,6 +306,64 @@ namespace proyecto
         private void Inventario_Load(object sender, EventArgs e)
         {
             CargarProductosDesdeBaseDeDatos();
+            listaProductos.LlenarDataGridView(dataGridView1);
+
+            txtBuscar.Text = "Buscar por ID o Nombre";
+            txtBuscar.ForeColor = Color.Gray;
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                string criterio = txtBuscar.Text.Trim();
+
+                // Si es número, busca por ID
+                if (int.TryParse(criterio, out int id))
+                {
+                    dataGridView1.Rows.Clear();
+                    listaProductos.BuscarNodoPorID(id, dataGridView1);
+                }
+                // si es texto, busca por nombre
+                else if (!string.IsNullOrWhiteSpace(criterio) && criterio != "Buscar por ID o Nombre")
+                {
+                    dataGridView1.Rows.Clear();
+                    listaProductos.BuscarNodoPorNombre(criterio, dataGridView1);
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un ID o nombre válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
+
+        //PlaceholderText
+        private void txtBuscar_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "Buscar por ID o Nombre")
+            {
+                txtBuscar.Text = "";
+                txtBuscar.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtBuscar_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+            {
+                txtBuscar.Text = "Buscar por ID o Nombre";
+                txtBuscar.ForeColor = Color.Gray;
+            }
+        }
+
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
             listaProductos.LlenarDataGridView(dataGridView1);
         }
     }

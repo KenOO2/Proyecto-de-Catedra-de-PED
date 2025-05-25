@@ -44,6 +44,11 @@
             txtPrecio = new TextBox();
             txtDescuento = new TextBox();
             panel1 = new Panel();
+            txtStock = new TextBox();
+            label7 = new Label();
+            txtBuscar = new TextBox();
+            label = new Label();
+            BtnActualizar = new Button();
             label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
@@ -54,11 +59,11 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.BackgroundColor = Color.Chocolate;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(10, 277);
+            dataGridView1.Location = new Point(10, 325);
             dataGridView1.Margin = new Padding(5, 4, 5, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(776, 452);
+            dataGridView1.Size = new Size(776, 404);
             dataGridView1.TabIndex = 0;
             // 
             // BtnAgregar
@@ -68,10 +73,10 @@
             BtnAgregar.FlatAppearance.BorderSize = 0;
             BtnAgregar.FlatStyle = FlatStyle.Flat;
             BtnAgregar.ForeColor = Color.Black;
-            BtnAgregar.Location = new Point(503, 103);
+            BtnAgregar.Location = new Point(488, 103);
             BtnAgregar.Margin = new Padding(5, 4, 5, 4);
             BtnAgregar.Name = "BtnAgregar";
-            BtnAgregar.Size = new Size(137, 53);
+            BtnAgregar.Size = new Size(137, 47);
             BtnAgregar.TabIndex = 1;
             BtnAgregar.Text = "Agregar Producto";
             BtnAgregar.UseVisualStyleBackColor = false;
@@ -83,10 +88,10 @@
             BtnEditar.BackColor = Color.Sienna;
             BtnEditar.FlatAppearance.BorderSize = 0;
             BtnEditar.FlatStyle = FlatStyle.Flat;
-            BtnEditar.Location = new Point(649, 103);
+            BtnEditar.Location = new Point(635, 103);
             BtnEditar.Margin = new Padding(5, 4, 5, 4);
             BtnEditar.Name = "BtnEditar";
-            BtnEditar.Size = new Size(137, 53);
+            BtnEditar.Size = new Size(137, 47);
             BtnEditar.TabIndex = 2;
             BtnEditar.Text = "Editar ";
             BtnEditar.UseVisualStyleBackColor = false;
@@ -98,10 +103,10 @@
             BtnEliminar.BackColor = Color.Sienna;
             BtnEliminar.FlatAppearance.BorderSize = 0;
             BtnEliminar.FlatStyle = FlatStyle.Flat;
-            BtnEliminar.Location = new Point(503, 195);
+            BtnEliminar.Location = new Point(488, 184);
             BtnEliminar.Margin = new Padding(5, 4, 5, 4);
             BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(137, 53);
+            BtnEliminar.Size = new Size(137, 51);
             BtnEliminar.TabIndex = 3;
             BtnEliminar.Text = "Eliminar ";
             BtnEliminar.UseVisualStyleBackColor = false;
@@ -113,14 +118,14 @@
             BtnBuscar.BackColor = Color.Sienna;
             BtnBuscar.FlatAppearance.BorderSize = 0;
             BtnBuscar.FlatStyle = FlatStyle.Flat;
-            BtnBuscar.Location = new Point(649, 195);
+            BtnBuscar.Location = new Point(488, 257);
             BtnBuscar.Margin = new Padding(5, 4, 5, 4);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(137, 53);
+            BtnBuscar.Size = new Size(284, 50);
             BtnBuscar.TabIndex = 4;
             BtnBuscar.Text = "Buscar";
             BtnBuscar.UseVisualStyleBackColor = false;
-            BtnBuscar.Click += BtnDescuento_Click;
+            BtnBuscar.Click += BtnBuscar_Click;
             // 
             // txtIDProducto
             // 
@@ -176,7 +181,7 @@
             // 
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(329, 184);
+            label5.Location = new Point(270, 184);
             label5.Name = "label5";
             label5.Size = new Size(79, 20);
             label5.TabIndex = 10;
@@ -209,21 +214,26 @@
             txtPrecio.Location = new Point(160, 208);
             txtPrecio.Margin = new Padding(5, 4, 5, 4);
             txtPrecio.Name = "txtPrecio";
-            txtPrecio.Size = new Size(135, 27);
+            txtPrecio.Size = new Size(97, 27);
             txtPrecio.TabIndex = 13;
             // 
             // txtDescuento
             // 
             txtDescuento.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtDescuento.BackColor = Color.BlanchedAlmond;
-            txtDescuento.Location = new Point(329, 208);
+            txtDescuento.Location = new Point(270, 208);
             txtDescuento.Margin = new Padding(5, 4, 5, 4);
             txtDescuento.Name = "txtDescuento";
-            txtDescuento.Size = new Size(140, 27);
+            txtDescuento.Size = new Size(101, 27);
             txtDescuento.TabIndex = 14;
             // 
             // panel1
             // 
+            panel1.Controls.Add(txtStock);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(txtBuscar);
+            panel1.Controls.Add(label);
+            panel1.Controls.Add(BtnActualizar);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(txtNomProducto);
             panel1.Controls.Add(dataGridView1);
@@ -245,6 +255,59 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 747);
             panel1.TabIndex = 15;
+            // 
+            // txtStock
+            // 
+            txtStock.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtStock.BackColor = Color.BlanchedAlmond;
+            txtStock.Location = new Point(381, 208);
+            txtStock.Margin = new Padding(5, 4, 5, 4);
+            txtStock.Name = "txtStock";
+            txtStock.Size = new Size(88, 27);
+            txtStock.TabIndex = 20;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Location = new Point(381, 184);
+            label7.Name = "label7";
+            label7.Size = new Size(45, 20);
+            label7.TabIndex = 19;
+            label7.Text = "Stock";
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.BackColor = Color.BlanchedAlmond;
+            txtBuscar.ForeColor = SystemColors.WindowText;
+            txtBuscar.Location = new Point(9, 280);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(460, 27);
+            txtBuscar.TabIndex = 18;
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.Location = new Point(10, 257);
+            label.Name = "label";
+            label.Size = new Size(119, 20);
+            label.TabIndex = 17;
+            label.Text = "Buscar Producto:";
+            // 
+            // BtnActualizar
+            // 
+            BtnActualizar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            BtnActualizar.BackColor = Color.Sienna;
+            BtnActualizar.FlatAppearance.BorderSize = 0;
+            BtnActualizar.FlatStyle = FlatStyle.Flat;
+            BtnActualizar.Location = new Point(635, 184);
+            BtnActualizar.Margin = new Padding(5, 4, 5, 4);
+            BtnActualizar.Name = "BtnActualizar";
+            BtnActualizar.Size = new Size(137, 51);
+            BtnActualizar.TabIndex = 16;
+            BtnActualizar.Text = "Actualizar Vista";
+            BtnActualizar.UseVisualStyleBackColor = false;
+            BtnActualizar.Click += BtnActualizar_Click;
             // 
             // label6
             // 
@@ -295,5 +358,10 @@
         private TextBox txtDescuento;
         private Panel panel1;
         private Label label6;
+        private Button BtnActualizar;
+        private TextBox txtBuscar;
+        private Label label;
+        private TextBox txtStock;
+        private Label label7;
     }
 }

@@ -22,8 +22,6 @@ namespace Vista
 
 
 
-
-
         #region PANEL TITULO
 
         private void pnltitulo_MouseDown_1(object sender, MouseEventArgs e)

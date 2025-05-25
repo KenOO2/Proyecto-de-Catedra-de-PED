@@ -1,108 +1,32 @@
-﻿using System;
+﻿using proyecto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vista;
 
-namespace proyecto
+namespace Vista
 {
-    public partial class Login_Usuario : Form
+    public partial class principalusuario1 : Form
     {
-        public Login_Usuario()
+        public principalusuario1()
         {
-
             InitializeComponent();
-            perzonalizaciondiseño();
-
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.DoubleBuffered = true;
-
         }
-
-        //menus que se abren 
-        private void perzonalizaciondiseño()
-        {
-            pnlsubmenu.Visible = false;
-            pnlsubmenu2.Visible = false;
-
-            //..
-
-        }
-
-        // metodo para ocultar el submenu
-        private void ocultarsubmenu()
-        {
-            if (pnlsubmenu.Visible == true)
-                pnlsubmenu.Visible = false;
-
-            if (pnlsubmenu2.Visible == true)
-                pnlsubmenu2.Visible = false;
-
-        }
-
-        private void Showsubmenu(Panel submenu)
-        {
-            if (submenu.Visible == false)
-            {
-                ocultarsubmenu();
-                submenu.Visible = true;
-            }
-            else
-                submenu.Visible = false;
-
-        }
-
-        private void Login_Usuario_Load(object sender, EventArgs e)
-        {
-
-        }
-        #region BOTONES
-        //acciones botones 
-        private void btndescuento_Click(object sender, EventArgs e)
-        {
-            Showsubmenu(pnlsubmenu);
-        }
-
-        private void btndescuentomayor_Click(object sender, EventArgs e)
-        {
-            ocultarsubmenu();
-        }
-
-        private void btndescuentomenor_Click(object sender, EventArgs e)
-        {
-            ocultarsubmenu();
-        }
-
-        private void btnpreciomayor_Click(object sender, EventArgs e)
-        {
-            ocultarsubmenu();
-        }
-
-        private void btnpreciomenor_Click(object sender, EventArgs e)
-        {
-            ocultarsubmenu();
-        }
-
-        private void btnprecio_Click(object sender, EventArgs e)
-        {
-            Showsubmenu(pnlsubmenu2);
-        }
-
-        private void pnlcontenedor_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        #endregion
 
 
         #region PANEL TITULO
+
+        private void pnltitulo_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
         //metodo redimencionar 
         private int tolerance = 12;
         private const int WM_NCHITTEST = 132;
@@ -131,7 +55,7 @@ namespace proyecto
             var region = new Region(new Rectangle(0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height));
             sizeGripRectangle = new Rectangle(this.ClientRectangle.Width - tolerance, this.ClientRectangle.Height - tolerance, tolerance, tolerance);
             region.Exclude(sizeGripRectangle);
-            this.pnlcontenedor.Region = region;
+            this.pnlcontenedor1.Region = region;
             this.Invalidate();
         }
         //color y grip rectangulo inferior
@@ -149,57 +73,93 @@ namespace proyecto
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void pnltitulo_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-
-        private void btncerrar_Click(object sender, EventArgs e)
+        private void btncerrar1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+
         int lx, ly;
         int sw, sh;
-        private void btnmaximizar_Click(object sender, EventArgs e)
+
+        private void btnmaximizar1_Click(object sender, EventArgs e)
         {
             lx = this.Location.X;
             ly = this.Location.Y;
             sw = this.Size.Width;
             sh = this.Size.Height;
-            btnmaximizar.Visible = false;
-            btnrestaurar.Visible = true;
+            btnmaximizar1.Visible = false;
+            btnrestaurar1.Visible = true;
             this.Size = Screen.PrimaryScreen!.WorkingArea.Size;
             this.Location = Screen.PrimaryScreen.WorkingArea.Location;
+
         }
 
-        private void btnrestaurar_Click(object sender, EventArgs e)
+        private void btnrestaurar1_Click(object sender, EventArgs e)
         {
-            btnmaximizar.Visible = true;
-            btnrestaurar.Visible = false;
+            btnmaximizar1.Visible = true;
+            btnrestaurar1.Visible = false;
             this.Size = new Size(sw, sh);
             this.Location = new Point(lx, ly);
         }
-        private void btnminimizar_Click(object sender, EventArgs e)
+
+
+        private void btnminimizar1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+
         #endregion
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        #region SUBMENU
+
+        bool menuexpand = true;
+        private void submenu_Tick(object sender, EventArgs e)
         {
-            Form1 nuevoFormulario = new Form1();
-            nuevoFormulario.Show();
+            if (menuexpand)
+            {
+                pnlmenu1.Width -= 10;
+                if (pnlmenu1.Width <= 72)
+                {
+                    menuexpand = false;
+                    submenu.Stop();
+
+                }
+            }
+            else
+            {
+                pnlmenu1.Width += 10;
+                if (pnlmenu1.Width >= 250)
+                {
+                    menuexpand = true;
+                    submenu.Stop();
+                }
+            }
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            submenu.Start();
+        }
+
+        #endregion
+
+        // ir a modo administrador 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            form.Show();
             this.Hide();
         }
 
-        private void pnlateral_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
 
+
+        #region FORM DENTRO DE FORM
+        //metodo abrir forms dentro de panel
         private void AbrirFormulario<MiForm>() where MiForm : Form, new()
         {
             Form formulario;
@@ -223,6 +183,39 @@ namespace proyecto
             }
         }
 
-    }
+       
 
+       
+
+        private void btnprincipal_Click(object sender, EventArgs e)
+        {
+            pnlcontenedorforms.Controls.Clear();
+            Tienda formprincipal = new Tienda();
+            formprincipal.TopLevel = false;
+            formprincipal.FormBorderStyle = FormBorderStyle.None;
+            formprincipal.Dock = DockStyle.Fill;
+            pnlcontenedorforms.Controls.Add(formprincipal);
+            formprincipal.Show();
+        }
+
+        private void btncarrito_Click(object sender, EventArgs e)
+        {
+            pnlcontenedorforms.Controls.Clear();
+            Carrito formcarrito = new Carrito();
+            formcarrito.TopLevel = false;
+            formcarrito.FormBorderStyle = FormBorderStyle.None;
+            formcarrito.Dock = DockStyle.Fill;
+            pnlcontenedorforms.Controls.Add(formcarrito);
+            formcarrito.Show();
+        }
+
+
+
+        #endregion
+
+
+
+
+    }
 }
+

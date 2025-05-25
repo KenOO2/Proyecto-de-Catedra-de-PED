@@ -17,7 +17,7 @@ namespace proyecto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new principaladministrador());
+            Application.Run(new principalusuario1());
         }
     }
 }

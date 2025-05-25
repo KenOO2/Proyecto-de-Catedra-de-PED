@@ -57,7 +57,7 @@
             // 
             // pnlcontenedor
             // 
-            pnlcontenedor.BackColor = Color.BlanchedAlmond;
+            pnlcontenedor.BackColor = Color.FromArgb(45, 66, 100);
             pnlcontenedor.Controls.Add(pnlcontenedorforms);
             pnlcontenedor.Controls.Add(pnlmenu);
             pnlcontenedor.Controls.Add(pnltitulo);
@@ -70,6 +70,7 @@
             // 
             // pnlcontenedorforms
             // 
+            pnlcontenedorforms.BackColor = Color.FromArgb(45, 66, 100);
             pnlcontenedorforms.Controls.Add(pictureBox2);
             pnlcontenedorforms.Dock = DockStyle.Fill;
             pnlcontenedorforms.Location = new Point(250, 40);
@@ -90,7 +91,7 @@
             // 
             // pnlmenu
             // 
-            pnlmenu.BackColor = Color.PeachPuff;
+            pnlmenu.BackColor = Color.FromArgb(42, 66, 120);
             pnlmenu.Controls.Add(btnproveedores);
             pnlmenu.Controls.Add(btninventario);
             pnlmenu.Controls.Add(panel1);
@@ -156,7 +157,7 @@
             // 
             // pnltitulo
             // 
-            pnltitulo.BackColor = Color.Peru;
+            pnltitulo.BackColor = Color.FromArgb(42, 50, 120);
             pnltitulo.Controls.Add(btnrestaurar);
             pnltitulo.Controls.Add(btnminimizar);
             pnltitulo.Controls.Add(btnmaximizar);

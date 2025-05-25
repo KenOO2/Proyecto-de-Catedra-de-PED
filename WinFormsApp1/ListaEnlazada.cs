@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proyecto
 {
-    public class ListaEnlazada
+    public class ListaEnlazada : IEnumerable<Nodo>
     {
         public List<Nodo> nodos { get; private set; } = new List<Nodo>();
 
@@ -17,8 +14,19 @@ namespace proyecto
             nodos = new List<Nodo>();
         }
 
-        // Función para llenar el DataGridView
+        // Implementación de IEnumerable<Nodo>
+        public IEnumerator<Nodo> GetEnumerator()
+        {
+            return nodos.GetEnumerator();
+        }
 
+        // Implementación explícita de IEnumerable
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        // Función para llenar el DataGridView
         public void LlenarDataGridView(DataGridView dataGridView1)
         {
             dataGridView1.Rows.Clear();
@@ -39,10 +47,9 @@ namespace proyecto
                 foreach (var nodo in nodos)
                 {
                     var valores = new List<object>
-            {
-                nodo.ID, // Agregar el ID
-               
-            };
+                    {
+                        nodo.ID, // Agregar el ID
+                    };
 
                     foreach (var valor in nodo.Datos.Values)
                     {
@@ -77,6 +84,7 @@ namespace proyecto
             {
                 if (nodo.ID == id)
                 {
+                    nodo.Name = name;
                     nodo.Datos = nuevosDatos;
                     break;
                 }
@@ -93,10 +101,9 @@ namespace proyecto
             if (nodo != null && dgv != null)
             {
                 var valores = new List<object>
-        {
-            nodo.ID, // Agregar el ID
-            nodo.Name // Agregar el Nombre
-        };
+                {
+                    nodo.ID, // Agregar el ID
+                };
 
                 // Extraer los valores del diccionario y asegurarse de que coincidan con las columnas existentes
                 foreach (var clave in nodo.Datos.Keys)
@@ -111,10 +118,9 @@ namespace proyecto
             {
                 MessageBox.Show("Nodo no encontrado o DataGridView es nulo.");
             }
-
         }
 
-        //Buscar nodo por Nombre
+        // Buscar nodo por Nombre
         public void BuscarNodoPorNombre(string nombre, DataGridView dgv)
         {
             // Limpiar filas previas para mostrar solo el nodo encontrado
@@ -122,14 +128,12 @@ namespace proyecto
 
             Nodo nodo = nodos.Find(n => n.Name == nombre);
 
-
             if (nodo != null && dgv != null)
             {
                 var valores = new List<object>
-        {
-            nodo.ID, // Agregar el ID
-            nodo.Name // Agregar el Nombre
-        };
+                {
+                    nodo.ID, // Agregar el ID
+                };
 
                 // Extraer los valores del diccionario y asegurarse de que coincidan con las columnas existentes
                 foreach (var clave in nodo.Datos.Keys)
@@ -146,11 +150,11 @@ namespace proyecto
             }
         }
 
+        // Vaciar la lista
         public void Vaciar()
         {
-            nodos.Clear();  
+            nodos.Clear();
         }
-
-
     }
 }
+

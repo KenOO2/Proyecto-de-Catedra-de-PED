@@ -19,6 +19,7 @@ namespace proyecto
         {
             ID = id;
             Name = name;
+
             Datos = datos;
         }
 
