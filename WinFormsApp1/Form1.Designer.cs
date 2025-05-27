@@ -80,10 +80,10 @@
             txtNombre.BorderStyle = BorderStyle.None;
             txtNombre.Font = new Font("Century Gothic", 12F);
             txtNombre.ForeColor = Color.White;
-            txtNombre.Location = new Point(43, 70);
-            txtNombre.Margin = new Padding(4, 3, 4, 3);
+            txtNombre.Location = new Point(49, 93);
+            txtNombre.Margin = new Padding(5, 4, 5, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(360, 20);
+            txtNombre.Size = new Size(411, 25);
             txtNombre.TabIndex = 0;
             // 
             // txtContraseña
@@ -92,10 +92,10 @@
             txtContraseña.BorderStyle = BorderStyle.None;
             txtContraseña.Font = new Font("Century Gothic", 12F);
             txtContraseña.ForeColor = Color.White;
-            txtContraseña.Location = new Point(43, 138);
-            txtContraseña.Margin = new Padding(4, 3, 4, 3);
+            txtContraseña.Location = new Point(49, 184);
+            txtContraseña.Margin = new Padding(5, 4, 5, 4);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.Size = new Size(360, 20);
+            txtContraseña.Size = new Size(411, 25);
             txtContraseña.TabIndex = 1;
             // 
             // label1
@@ -103,10 +103,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.LightGray;
-            label1.Location = new Point(43, 46);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(49, 61);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(66, 21);
+            label1.Size = new Size(79, 23);
             label1.TabIndex = 2;
             label1.Text = "Usuario";
             // 
@@ -115,10 +115,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.LightGray;
-            label2.Location = new Point(43, 114);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(49, 152);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(107, 21);
+            label2.Size = new Size(131, 23);
             label2.TabIndex = 3;
             label2.Text = "Contraseña ";
             // 
@@ -126,9 +126,10 @@
             // 
             btnminimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnminimizar.Image = (Image)resources.GetObject("btnminimizar.Image");
-            btnminimizar.Location = new Point(1120, 12);
+            btnminimizar.Location = new Point(1280, 16);
+            btnminimizar.Margin = new Padding(3, 4, 3, 4);
             btnminimizar.Name = "btnminimizar";
-            btnminimizar.Size = new Size(16, 16);
+            btnminimizar.Size = new Size(18, 21);
             btnminimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             btnminimizar.TabIndex = 6;
             btnminimizar.TabStop = false;
@@ -137,9 +138,10 @@
             // 
             btnmaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnmaximizar.Image = (Image)resources.GetObject("btnmaximizar.Image");
-            btnmaximizar.Location = new Point(1142, 12);
+            btnmaximizar.Location = new Point(1305, 16);
+            btnmaximizar.Margin = new Padding(3, 4, 3, 4);
             btnmaximizar.Name = "btnmaximizar";
-            btnmaximizar.Size = new Size(16, 16);
+            btnmaximizar.Size = new Size(18, 21);
             btnmaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
             btnmaximizar.TabIndex = 5;
             btnmaximizar.TabStop = false;
@@ -148,9 +150,10 @@
             // 
             btncerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btncerrar.Image = (Image)resources.GetObject("btncerrar.Image");
-            btncerrar.Location = new Point(1164, 12);
+            btncerrar.Location = new Point(1330, 16);
+            btncerrar.Margin = new Padding(3, 4, 3, 4);
             btncerrar.Name = "btncerrar";
-            btncerrar.Size = new Size(16, 16);
+            btncerrar.Size = new Size(18, 21);
             btncerrar.SizeMode = PictureBoxSizeMode.CenterImage;
             btncerrar.TabIndex = 4;
             btncerrar.TabStop = false;
@@ -165,8 +168,9 @@
             pnltitulo.Controls.Add(btncerrar);
             pnltitulo.Dock = DockStyle.Top;
             pnltitulo.Location = new Point(0, 0);
+            pnltitulo.Margin = new Padding(3, 4, 3, 4);
             pnltitulo.Name = "pnltitulo";
-            pnltitulo.Size = new Size(442, 40);
+            pnltitulo.Size = new Size(505, 53);
             pnltitulo.TabIndex = 0;
             pnltitulo.MouseDown += pnltitulo_MouseDown;
             // 
@@ -175,9 +179,10 @@
             btnminimizarlogin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnminimizarlogin.Cursor = Cursors.Hand;
             btnminimizarlogin.Image = (Image)resources.GetObject("btnminimizarlogin.Image");
-            btnminimizarlogin.Location = new Point(387, 12);
+            btnminimizarlogin.Location = new Point(442, 16);
+            btnminimizarlogin.Margin = new Padding(3, 4, 3, 4);
             btnminimizarlogin.Name = "btnminimizarlogin";
-            btnminimizarlogin.Size = new Size(16, 16);
+            btnminimizarlogin.Size = new Size(18, 21);
             btnminimizarlogin.SizeMode = PictureBoxSizeMode.CenterImage;
             btnminimizarlogin.TabIndex = 10;
             btnminimizarlogin.TabStop = false;
@@ -188,9 +193,10 @@
             btncerrarlogin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btncerrarlogin.Cursor = Cursors.Hand;
             btncerrarlogin.Image = (Image)resources.GetObject("btncerrarlogin.Image");
-            btncerrarlogin.Location = new Point(409, 12);
+            btncerrarlogin.Location = new Point(467, 16);
+            btncerrarlogin.Margin = new Padding(3, 4, 3, 4);
             btncerrarlogin.Name = "btncerrarlogin";
-            btncerrarlogin.Size = new Size(16, 16);
+            btncerrarlogin.Size = new Size(18, 21);
             btncerrarlogin.SizeMode = PictureBoxSizeMode.CenterImage;
             btncerrarlogin.TabIndex = 8;
             btncerrarlogin.TabStop = false;
@@ -205,8 +211,9 @@
             pnlcontenedorlogin.Controls.Add(pnltitulo);
             pnlcontenedorlogin.Dock = DockStyle.Fill;
             pnlcontenedorlogin.Location = new Point(0, 0);
+            pnlcontenedorlogin.Margin = new Padding(3, 4, 3, 4);
             pnlcontenedorlogin.Name = "pnlcontenedorlogin";
-            pnlcontenedorlogin.Size = new Size(442, 537);
+            pnlcontenedorlogin.Size = new Size(505, 716);
             pnlcontenedorlogin.TabIndex = 7;
             // 
             // panel3
@@ -219,18 +226,20 @@
             panel3.Controls.Add(button1);
             panel3.Controls.Add(btninventario);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 153);
+            panel3.Location = new Point(0, 204);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(442, 369);
+            panel3.Size = new Size(505, 492);
             panel3.TabIndex = 19;
             panel3.Paint += panel3_Paint;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Location = new Point(43, 336);
+            panel2.Location = new Point(49, 448);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(360, 2);
+            panel2.Size = new Size(411, 3);
             panel2.TabIndex = 17;
             // 
             // button1
@@ -241,10 +250,11 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(43, 276);
+            button1.Location = new Point(49, 368);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Padding = new Padding(10, 0, 0, 0);
-            button1.Size = new Size(223, 37);
+            button1.Padding = new Padding(11, 0, 0, 0);
+            button1.Size = new Size(255, 49);
             button1.TabIndex = 15;
             button1.Text = "     Regresar a modo usuario";
             button1.UseVisualStyleBackColor = false;
@@ -258,10 +268,11 @@
             btninventario.FlatStyle = FlatStyle.Flat;
             btninventario.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btninventario.ForeColor = SystemColors.ButtonHighlight;
-            btninventario.Location = new Point(43, 197);
+            btninventario.Location = new Point(49, 263);
+            btninventario.Margin = new Padding(3, 4, 3, 4);
             btninventario.Name = "btninventario";
-            btninventario.Padding = new Padding(10, 0, 0, 0);
-            btninventario.Size = new Size(360, 39);
+            btninventario.Padding = new Padding(11, 0, 0, 0);
+            btninventario.Size = new Size(411, 52);
             btninventario.TabIndex = 14;
             btninventario.Text = "     Entrar";
             btninventario.UseVisualStyleBackColor = false;
@@ -271,10 +282,11 @@
             // 
             pictureBox9.Dock = DockStyle.Top;
             pictureBox9.Image = (Image)resources.GetObject("pictureBox9.Image");
-            pictureBox9.Location = new Point(0, 40);
+            pictureBox9.Location = new Point(0, 53);
+            pictureBox9.Margin = new Padding(3, 4, 3, 4);
             pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(442, 113);
-            pictureBox9.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox9.Size = new Size(505, 151);
+            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox9.TabIndex = 18;
             pictureBox9.TabStop = false;
             // 
@@ -290,18 +302,20 @@
             panel1.Controls.Add(pictureBox7);
             panel1.Controls.Add(pictureBox8);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 522);
+            panel1.Location = new Point(0, 696);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(442, 15);
+            panel1.Size = new Size(505, 20);
             panel1.TabIndex = 16;
             // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(682, 12);
+            pictureBox1.Location = new Point(779, 16);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(16, 16);
+            pictureBox1.Size = new Size(18, 21);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 11;
             pictureBox1.TabStop = false;
@@ -311,9 +325,10 @@
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(1377, 12);
+            pictureBox2.Location = new Point(1574, 16);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(16, 16);
+            pictureBox2.Size = new Size(18, 21);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
@@ -323,9 +338,10 @@
             // 
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(660, 12);
+            pictureBox3.Location = new Point(754, 16);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(16, 16);
+            pictureBox3.Size = new Size(18, 21);
             pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox3.TabIndex = 10;
             pictureBox3.TabStop = false;
@@ -334,9 +350,10 @@
             // 
             pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(1415, 12);
+            pictureBox4.Location = new Point(1617, 16);
+            pictureBox4.Margin = new Padding(3, 4, 3, 4);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(16, 16);
+            pictureBox4.Size = new Size(18, 21);
             pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox4.TabIndex = 6;
             pictureBox4.TabStop = false;
@@ -345,9 +362,10 @@
             // 
             pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(682, 12);
+            pictureBox5.Location = new Point(779, 16);
+            pictureBox5.Margin = new Padding(3, 4, 3, 4);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(16, 16);
+            pictureBox5.Size = new Size(18, 21);
             pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox5.TabIndex = 9;
             pictureBox5.TabStop = false;
@@ -356,9 +374,10 @@
             // 
             pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(704, 12);
+            pictureBox6.Location = new Point(805, 16);
+            pictureBox6.Margin = new Padding(3, 4, 3, 4);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(16, 16);
+            pictureBox6.Size = new Size(18, 21);
             pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox6.TabIndex = 8;
             pictureBox6.TabStop = false;
@@ -367,9 +386,10 @@
             // 
             pictureBox7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(1437, 12);
+            pictureBox7.Location = new Point(1642, 16);
+            pictureBox7.Margin = new Padding(3, 4, 3, 4);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(16, 16);
+            pictureBox7.Size = new Size(18, 21);
             pictureBox7.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox7.TabIndex = 5;
             pictureBox7.TabStop = false;
@@ -378,22 +398,23 @@
             // 
             pictureBox8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
-            pictureBox8.Location = new Point(1459, 12);
+            pictureBox8.Location = new Point(1667, 16);
+            pictureBox8.Margin = new Padding(3, 4, 3, 4);
             pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(16, 16);
+            pictureBox8.Size = new Size(18, 21);
             pictureBox8.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox8.TabIndex = 4;
             pictureBox8.TabStop = false;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(442, 537);
+            ClientSize = new Size(505, 716);
             Controls.Add(pnlcontenedorlogin);
             Cursor = Cursors.Hand;
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login administrador ";
