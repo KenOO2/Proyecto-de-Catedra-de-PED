@@ -18,6 +18,6 @@ Pasos para instalar y ejecutar este programa es su computadora:
 
 8-Para cambiar de vista tines que loguearte primeramente, usa los siguientes datos: Usuario: Gabriel y Contraseña: 1234.
 
-9' Una vez accedas al menu administrativo podras hacer uso de las opciones implementadas las cuales son "Productos" y "Proveedores".
+9-Una vez accedas al menu administrativo podras hacer uso de las opciones implementadas las cuales son "Productos" y "Proveedores".
 
 10-Para volver a la vista de clientes solo presiona click izquierdo al boton en la parte inferior del menu lateral. 
