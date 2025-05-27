@@ -1,5 +1,6 @@
 use Codex
 
+
 CREATE DATABASE Codex
 
 CREATE TABLE Usuarios(
@@ -45,3 +46,5 @@ select * from Usuarios
 select * from Productos
 select * from Proveedores
 
+
+SELECT IdProducto, NomProducto, IdProveedor, Precio, Descuento , Stock FROM Productos

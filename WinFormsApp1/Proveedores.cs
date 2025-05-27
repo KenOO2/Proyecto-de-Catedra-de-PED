@@ -25,7 +25,7 @@ namespace proyecto
         {
             Modificación_de_Proveedores form = new Modificación_de_Proveedores();
             form.Show();
-            this.Hide();
+           
 
         }
         public void ActualizarDatagrid()
@@ -111,22 +111,31 @@ namespace proyecto
             {
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
+                    DialogResult result = MessageBox.Show($"¿Está seguro de que desea eliminar el proveedor {dataGridView1.SelectedRows[0].Cells["Nombre"]}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
 
-                    int indiceSeleccionado = dataGridView1.SelectedRows[0].Index;
+                        int indiceSeleccionado = dataGridView1.SelectedRows[0].Index;
 
-                    int idProveedor = lista.nodos[indiceSeleccionado].ID;
+                        int idProveedor = lista.nodos[indiceSeleccionado].ID;
 
 
-                    // elimina el producto en la lista 
-                    lista.EliminarNodoPorID(idProveedor);
+                        // elimina el producto en la lista 
+                        lista.EliminarNodoPorID(idProveedor);
 
-                    // elimina el producto en la base 
-                    EliminarDeBD(idProveedor);
+                        // elimina el producto en la base 
+                        EliminarDeBD(idProveedor);
 
-                    // se actualiza datagridview
-                    lista.LlenarDataGridView(dataGridView1);
+                        // se actualiza datagridview
+                        lista.LlenarDataGridView(dataGridView1);
 
-                    MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    if (result == DialogResult.No)
+                    {
+                        MessageBox.Show("Eliminación cancelada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                 }
                 else
                 {

@@ -22,11 +22,12 @@ namespace Vista
 
         #region PANEL TITULO
 
-        private void pnltitulo_MouseDown_1(object sender, MouseEventArgs e)
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+        
         //metodo redimencionar 
         private int tolerance = 12;
         private const int WM_NCHITTEST = 132;
@@ -183,9 +184,9 @@ namespace Vista
             }
         }
 
-       
 
-       
+
+
 
         private void btnprincipal_Click(object sender, EventArgs e)
         {
@@ -216,6 +217,7 @@ namespace Vista
 
 
 
+        
     }
 }
 

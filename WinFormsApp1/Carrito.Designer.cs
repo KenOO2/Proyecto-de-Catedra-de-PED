@@ -28,243 +28,363 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             label1 = new Label();
             dgvCarrito = new DataGridView();
             button1 = new Button();
             label2 = new Label();
-            txtTotal = new TextBox();
             btnEliminar = new Button();
             btnLimpiar = new Button();
             label3 = new Label();
             label4 = new Label();
-            txtDescuentos = new TextBox();
-            txtSubtotal = new TextBox();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            txtNombre = new TextBox();
+            txtDireccion = new TextBox();
+            txtTarjeta = new TextBox();
+            txtCVV = new TextBox();
             label9 = new Label();
-            textBox6 = new TextBox();
+            txtCaducidad = new TextBox();
+            lblSubtotal = new Label();
+            lblDescuentos = new Label();
+            lblTotal = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(14, 12);
+            label1.Font = new Font("Cooper Black", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(301, 27);
             label1.Name = "label1";
-            label1.Size = new Size(131, 37);
+            label1.Size = new Size(189, 39);
             label1.TabIndex = 0;
             label1.Text = "Mi carrito";
             // 
             // dgvCarrito
             // 
+            dgvCarrito.Anchor = AnchorStyles.Top;
+            dgvCarrito.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCarrito.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dgvCarrito.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvCarrito.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCarrito.Location = new Point(14, 71);
+            dgvCarrito.EnableHeadersVisualStyles = false;
+            dgvCarrito.GridColor = Color.SteelBlue;
+            dgvCarrito.Location = new Point(14, 88);
             dgvCarrito.Margin = new Padding(3, 4, 3, 4);
             dgvCarrito.Name = "dgvCarrito";
+            dgvCarrito.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvCarrito.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvCarrito.RowHeadersWidth = 51;
-            dgvCarrito.Size = new Size(774, 451);
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle6.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = Color.White;
+            dgvCarrito.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dgvCarrito.Size = new Size(774, 345);
             dgvCarrito.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(14, 530);
+            button1.Anchor = AnchorStyles.Top;
+            button1.BackColor = Color.FromArgb(42, 50, 150);
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Century Gothic", 12F);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(14, 441);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(187, 59);
             button1.TabIndex = 2;
             button1.Text = "Concluir  pedido";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Location = new Point(519, 718);
+            label2.Font = new Font("Century Gothic", 9F);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(509, 623);
             label2.Name = "label2";
-            label2.Size = new Size(104, 20);
+            label2.Size = new Size(113, 20);
             label2.TabIndex = 3;
             label2.Text = "Total a pagar :";
             // 
-            // txtTotal
-            // 
-            txtTotal.Enabled = false;
-            txtTotal.Location = new Point(629, 712);
-            txtTotal.Margin = new Padding(3, 4, 3, 4);
-            txtTotal.Name = "txtTotal";
-            txtTotal.Size = new Size(159, 27);
-            txtTotal.TabIndex = 4;
-            // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(601, 530);
+            btnEliminar.Anchor = AnchorStyles.Top;
+            btnEliminar.BackColor = Color.FromArgb(42, 50, 150);
+            btnEliminar.Cursor = Cursors.Hand;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Font = new Font("Century Gothic", 12F);
+            btnEliminar.ForeColor = Color.White;
+            btnEliminar.Location = new Point(601, 441);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(187, 59);
             btnEliminar.TabIndex = 5;
             btnEliminar.Text = "Eliminar producto";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(312, 530);
+            btnLimpiar.Anchor = AnchorStyles.Top;
+            btnLimpiar.BackColor = Color.FromArgb(42, 50, 150);
+            btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.FlatAppearance.BorderSize = 0;
+            btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Century Gothic", 12F);
+            btnLimpiar.ForeColor = Color.White;
+            btnLimpiar.Location = new Point(301, 441);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(187, 59);
             btnLimpiar.TabIndex = 6;
             btnLimpiar.Text = "Limpiar carrito";
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Location = new Point(549, 632);
+            label3.Font = new Font("Century Gothic", 9F);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(509, 545);
             label3.Name = "label3";
-            label3.Size = new Size(74, 20);
+            label3.Size = new Size(76, 20);
             label3.TabIndex = 7;
             label3.Text = "Sub Total:";
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Top;
             label4.AutoSize = true;
-            label4.Location = new Point(498, 675);
+            label4.Font = new Font("Century Gothic", 9F);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(509, 584);
             label4.Name = "label4";
-            label4.Size = new Size(125, 20);
+            label4.Size = new Size(136, 20);
             label4.TabIndex = 8;
             label4.Text = "Total Descuentos:";
             // 
-            // txtDescuentos
-            // 
-            txtDescuentos.Enabled = false;
-            txtDescuentos.Location = new Point(629, 672);
-            txtDescuentos.Margin = new Padding(3, 4, 3, 4);
-            txtDescuentos.Name = "txtDescuentos";
-            txtDescuentos.Size = new Size(159, 27);
-            txtDescuentos.TabIndex = 9;
-            // 
-            // txtSubtotal
-            // 
-            txtSubtotal.Enabled = false;
-            txtSubtotal.Location = new Point(629, 629);
-            txtSubtotal.Margin = new Padding(3, 4, 3, 4);
-            txtSubtotal.Name = "txtSubtotal";
-            txtSubtotal.Size = new Size(159, 27);
-            txtSubtotal.TabIndex = 10;
-            // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Top;
             label5.AutoSize = true;
-            label5.Location = new Point(12, 593);
+            label5.Font = new Font("Century Gothic", 9F);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(17, 545);
             label5.Name = "label5";
-            label5.Size = new Size(67, 20);
+            label5.Size = new Size(72, 20);
             label5.TabIndex = 11;
             label5.Text = "Nombre:";
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top;
             label6.AutoSize = true;
-            label6.Location = new Point(11, 629);
+            label6.Font = new Font("Century Gothic", 9F);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(17, 584);
             label6.Name = "label6";
-            label6.Size = new Size(75, 20);
+            label6.Size = new Size(84, 20);
             label6.TabIndex = 12;
             label6.Text = "Direccion:";
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Top;
             label7.AutoSize = true;
-            label7.Location = new Point(11, 656);
+            label7.Font = new Font("Century Gothic", 9F);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(17, 623);
             label7.Name = "label7";
-            label7.Size = new Size(74, 20);
+            label7.Size = new Size(80, 20);
             label7.TabIndex = 13;
             label7.Text = "N. Tarjeta:";
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.Top;
             label8.AutoSize = true;
-            label8.Location = new Point(14, 687);
+            label8.Font = new Font("Century Gothic", 9F);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(17, 661);
             label8.Name = "label8";
-            label8.Size = new Size(39, 20);
+            label8.Size = new Size(47, 20);
             label8.TabIndex = 14;
             label8.Text = "CVV:";
             // 
-            // textBox2
+            // txtNombre
             // 
-            textBox2.Location = new Point(85, 590);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(159, 27);
-            textBox2.TabIndex = 15;
+            txtNombre.Anchor = AnchorStyles.Top;
+            txtNombre.BackColor = Color.FromArgb(80, 94, 129);
+            txtNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtNombre.Font = new Font("Century Gothic", 9F);
+            txtNombre.ForeColor = Color.White;
+            txtNombre.Location = new Point(107, 535);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(160, 26);
+            txtNombre.TabIndex = 15;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
-            // textBox3
+            // txtDireccion
             // 
-            textBox3.Location = new Point(85, 622);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(159, 27);
-            textBox3.TabIndex = 16;
+            txtDireccion.Anchor = AnchorStyles.Top;
+            txtDireccion.BackColor = Color.FromArgb(80, 94, 129);
+            txtDireccion.BorderStyle = BorderStyle.FixedSingle;
+            txtDireccion.Font = new Font("Century Gothic", 9F);
+            txtDireccion.ForeColor = Color.White;
+            txtDireccion.Location = new Point(107, 578);
+            txtDireccion.Margin = new Padding(3, 4, 3, 4);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(160, 26);
+            txtDireccion.TabIndex = 16;
             // 
-            // textBox4
+            // txtTarjeta
             // 
-            textBox4.Location = new Point(85, 653);
-            textBox4.Margin = new Padding(3, 4, 3, 4);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(159, 27);
-            textBox4.TabIndex = 17;
+            txtTarjeta.Anchor = AnchorStyles.Top;
+            txtTarjeta.BackColor = Color.FromArgb(80, 94, 129);
+            txtTarjeta.BorderStyle = BorderStyle.FixedSingle;
+            txtTarjeta.Font = new Font("Century Gothic", 9F);
+            txtTarjeta.ForeColor = Color.White;
+            txtTarjeta.Location = new Point(107, 617);
+            txtTarjeta.Margin = new Padding(3, 4, 3, 4);
+            txtTarjeta.Name = "txtTarjeta";
+            txtTarjeta.Size = new Size(160, 26);
+            txtTarjeta.TabIndex = 17;
+            txtTarjeta.KeyPress += txtTarjeta_KeyPress;
             // 
-            // textBox5
+            // txtCVV
             // 
-            textBox5.Location = new Point(85, 684);
-            textBox5.Margin = new Padding(3, 4, 3, 4);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(159, 27);
-            textBox5.TabIndex = 18;
+            txtCVV.Anchor = AnchorStyles.Top;
+            txtCVV.BackColor = Color.FromArgb(80, 94, 129);
+            txtCVV.BorderStyle = BorderStyle.FixedSingle;
+            txtCVV.Font = new Font("Century Gothic", 9F);
+            txtCVV.ForeColor = Color.White;
+            txtCVV.Location = new Point(107, 653);
+            txtCVV.Margin = new Padding(3, 4, 3, 4);
+            txtCVV.Name = "txtCVV";
+            txtCVV.Size = new Size(160, 26);
+            txtCVV.TabIndex = 18;
+            txtCVV.KeyPress += txtCVV_KeyPress;
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.Top;
             label9.AutoSize = true;
-            label9.Location = new Point(12, 719);
+            label9.Font = new Font("Century Gothic", 9F);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(14, 697);
             label9.Name = "label9";
-            label9.Size = new Size(51, 20);
+            label9.Size = new Size(63, 20);
             label9.TabIndex = 19;
             label9.Text = "Vence:";
             // 
-            // textBox6
+            // txtCaducidad
             // 
-            textBox6.Location = new Point(85, 716);
-            textBox6.Margin = new Padding(3, 4, 3, 4);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(159, 27);
-            textBox6.TabIndex = 20;
+            txtCaducidad.Anchor = AnchorStyles.Top;
+            txtCaducidad.BackColor = Color.FromArgb(80, 94, 129);
+            txtCaducidad.BorderStyle = BorderStyle.FixedSingle;
+            txtCaducidad.Font = new Font("Century Gothic", 9F);
+            txtCaducidad.ForeColor = Color.White;
+            txtCaducidad.Location = new Point(107, 691);
+            txtCaducidad.Margin = new Padding(3, 4, 3, 4);
+            txtCaducidad.Name = "txtCaducidad";
+            txtCaducidad.Size = new Size(160, 26);
+            txtCaducidad.TabIndex = 20;
+            txtCaducidad.Text = "MM/YYYY";
+            txtCaducidad.Click += txtCaducidad_Click;
+            // 
+            // lblSubtotal
+            // 
+            lblSubtotal.Anchor = AnchorStyles.Top;
+            lblSubtotal.AutoSize = true;
+            lblSubtotal.Font = new Font("Century Gothic", 9F);
+            lblSubtotal.ForeColor = Color.White;
+            lblSubtotal.Location = new Point(701, 545);
+            lblSubtotal.Name = "lblSubtotal";
+            lblSubtotal.Size = new Size(21, 20);
+            lblSubtotal.TabIndex = 21;
+            lblSubtotal.Text = "...";
+            // 
+            // lblDescuentos
+            // 
+            lblDescuentos.Anchor = AnchorStyles.Top;
+            lblDescuentos.AutoSize = true;
+            lblDescuentos.Font = new Font("Century Gothic", 9F);
+            lblDescuentos.ForeColor = Color.White;
+            lblDescuentos.Location = new Point(701, 584);
+            lblDescuentos.Name = "lblDescuentos";
+            lblDescuentos.Size = new Size(21, 20);
+            lblDescuentos.TabIndex = 22;
+            lblDescuentos.Text = "...";
+            // 
+            // lblTotal
+            // 
+            lblTotal.Anchor = AnchorStyles.Top;
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Century Gothic", 9F);
+            lblTotal.ForeColor = Color.White;
+            lblTotal.Location = new Point(701, 623);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(21, 20);
+            lblTotal.TabIndex = 23;
+            lblTotal.Text = "...";
             // 
             // Carrito
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SlateGray;
             ClientSize = new Size(800, 747);
-            Controls.Add(textBox6);
+            Controls.Add(lblTotal);
+            Controls.Add(lblDescuentos);
+            Controls.Add(lblSubtotal);
+            Controls.Add(txtCaducidad);
             Controls.Add(label9);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(txtCVV);
+            Controls.Add(txtTarjeta);
+            Controls.Add(txtDireccion);
+            Controls.Add(txtNombre);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(txtSubtotal);
-            Controls.Add(txtDescuentos);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
-            Controls.Add(txtTotal);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(dgvCarrito);
@@ -273,6 +393,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "Carrito";
             Text = "Carrito";
+            Load += Carrito_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -284,22 +405,22 @@
         private DataGridView dgvCarrito;
         private Button button1;
         private Label label2;
-        private TextBox txtTotal;
         private Button btnEliminar;
         private Button btnLimpiar;
         private Label label3;
         private Label label4;
-        private TextBox txtDescuentos;
-        private TextBox txtSubtotal;
         private Label label5;
         private Label label6;
         private Label label7;
         private Label label8;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox txtNombre;
+        private TextBox txtDireccion;
+        private TextBox txtTarjeta;
+        private TextBox txtCVV;
         private Label label9;
-        private TextBox textBox6;
+        private TextBox txtCaducidad;
+        private Label lblSubtotal;
+        private Label lblDescuentos;
+        private Label lblTotal;
     }
 }

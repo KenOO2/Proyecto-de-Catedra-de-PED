@@ -111,6 +111,7 @@ namespace Vista
 
         #endregion
 
+
         //metodo abrir forms dentro de panel
         private void AbrirFormulario<MiForm>() where MiForm : Form, new()
         {
@@ -134,7 +135,8 @@ namespace Vista
                 formulario.BringToFront();
             }
         }
-        private void btninventario_Click(object sender, EventArgs e) //Roni: cambie esta onda porque si entraba a inventario me quedaba stuck aca
+
+        private void btninventario_Click_1(object sender, EventArgs e)
         {
             pnlcontenedorforms.Controls.Clear(); // Limpiar el panel completamente
             Inventario formInventario = new Inventario();
@@ -143,10 +145,8 @@ namespace Vista
             formInventario.Dock = DockStyle.Fill;
             pnlcontenedorforms.Controls.Add(formInventario);
             formInventario.Show();
-
         }
-
-        private void btnproveedores_Click(object sender, EventArgs e)
+        private void btnproveedores_Click_1(object sender, EventArgs e)
         {
             pnlcontenedorforms.Controls.Clear(); // Limpiar el panel ANTES de agregar el formulario
 
@@ -175,6 +175,60 @@ namespace Vista
                 formproveedores.Focus();
             }
 
+        }
+
+
+
+       
+
+        #region SUBMENU
+
+        bool menuexpand = true;
+
+        private void submenuad_Tick(object sender, EventArgs e)
+        {
+            if (menuexpand)
+            {
+                pnlmenu.Width -= 10;
+                if (pnlmenu.Width <= 72)
+                {
+                    menuexpand = false;
+                    submenuad.Stop();
+
+                }
+            }
+            else
+            {
+                pnlmenu.Width += 10;
+                if (pnlmenu.Width >= 250)
+                {
+                    menuexpand = true;
+                    submenuad.Stop();
+                }
+            }
+        }
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            submenuad.Start();
+        }
+
+
+
+        #endregion
+             
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            principalusuario1 formusuario = new principalusuario1 ();
+            formusuario.Show();
+            this.Hide();
         }
     }
 

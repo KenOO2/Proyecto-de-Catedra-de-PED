@@ -40,11 +40,9 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.Anchor = AnchorStyles.Top;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.HotTrack;
@@ -55,12 +53,12 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Cursor = Cursors.Hand;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.SteelBlue;
             dataGridView1.Location = new Point(17, 92);
-            dataGridView1.Margin = new Padding(4, 4, 4, 4);
+            dataGridView1.Margin = new Padding(4);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
@@ -82,13 +80,17 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.Sienna;
+            button1.Anchor = AnchorStyles.Top;
+            button1.BackColor = Color.FromArgb(42, 50, 150);
+            button1.Cursor = Cursors.Hand;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(33, 14);
-            button1.Margin = new Padding(4, 4, 4, 4);
+            button1.Font = new Font("Century Gothic", 12F);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(17, 14);
+            button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(153, 47);
+            button1.Size = new Size(169, 55);
             button1.TabIndex = 1;
             button1.Text = "Agregar Proveedor ";
             button1.UseVisualStyleBackColor = false;
@@ -96,13 +98,17 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.Sienna;
+            button2.Anchor = AnchorStyles.Top;
+            button2.BackColor = Color.FromArgb(42, 50, 150);
+            button2.Cursor = Cursors.Hand;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(210, 14);
-            button2.Margin = new Padding(4, 4, 4, 4);
+            button2.Font = new Font("Century Gothic", 12F);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(194, 13);
+            button2.Margin = new Padding(4);
             button2.Name = "button2";
-            button2.Size = new Size(153, 47);
+            button2.Size = new Size(153, 55);
             button2.TabIndex = 2;
             button2.Text = "Eliminar";
             button2.UseVisualStyleBackColor = false;
@@ -110,13 +116,17 @@
             // 
             // btnmodificar
             // 
-            btnmodificar.BackColor = Color.Sienna;
+            btnmodificar.Anchor = AnchorStyles.Top;
+            btnmodificar.BackColor = Color.FromArgb(42, 50, 150);
+            btnmodificar.Cursor = Cursors.Hand;
             btnmodificar.FlatAppearance.BorderSize = 0;
             btnmodificar.FlatStyle = FlatStyle.Flat;
-            btnmodificar.Location = new Point(381, 14);
-            btnmodificar.Margin = new Padding(4, 4, 4, 4);
+            btnmodificar.Font = new Font("Century Gothic", 12F);
+            btnmodificar.ForeColor = Color.White;
+            btnmodificar.Location = new Point(355, 13);
+            btnmodificar.Margin = new Padding(4);
             btnmodificar.Name = "btnmodificar";
-            btnmodificar.Size = new Size(153, 47);
+            btnmodificar.Size = new Size(153, 55);
             btnmodificar.TabIndex = 3;
             btnmodificar.Text = "Modificar";
             btnmodificar.UseVisualStyleBackColor = false;
@@ -126,15 +136,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(45, 66, 120);
+            BackColor = Color.SlateGray;
             ClientSize = new Size(700, 560);
             Controls.Add(btnmodificar);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Proveedores";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Proveedores";
             Load += Proveedores_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

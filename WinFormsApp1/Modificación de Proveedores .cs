@@ -42,7 +42,7 @@ namespace proyecto
         private void cargarDatosProveedor()
         {
             txtidprove.Text = proveedoractual.ID.ToString();
-            txtname.Text = proveedoractual.Datos["Nombre"].ToString().Trim() ;
+            txtname.Text = proveedoractual.Datos["Nombre"].ToString().Trim();
             txtemail.Text = proveedoractual.Datos["Email"].ToString().Trim();
             txttelefono.Text = proveedoractual.Datos["Telefono"].ToString().Trim();
             txtiva.Text = proveedoractual.Datos["RegistroIVA"].ToString().Trim();
@@ -67,7 +67,7 @@ namespace proyecto
             {
                 return;
             }
-            if(!Validarlongitud(txtiva.Text))
+            if (!Validarlongitud(txtiva.Text))
             {
                 return;
             }
@@ -86,7 +86,7 @@ namespace proyecto
                     {"Telefono", telefono},
                     {"RegistroIVA", RegistroIVA}
                 };
-                if(esModificacion) //si estamos modificando 
+                if (esModificacion) //si estamos modificando 
                 {
                     proveedoractual.ID = id;
                     proveedoractual.Datos = datos;
@@ -103,7 +103,7 @@ namespace proyecto
 
                 //Accede al form proveedores dentro del principal admin
                 Proveedores prove = (Proveedores)Application.OpenForms["Proveedores"];
-                if(prove != null)
+                if (prove != null)
                 {
                     prove.CargarDatos();
                     prove.ActualizarDatagrid();//actualiza los datos
@@ -183,7 +183,7 @@ namespace proyecto
         {
             Proveedores probe = (Proveedores)Application.OpenForms["Proveedores"];
 
-            if(probe != null && !probe.IsDisposed)
+            if (probe != null && !probe.IsDisposed)
             {
                 probe.CargarDatos();
                 probe.ActualizarDatagrid();
@@ -278,12 +278,30 @@ namespace proyecto
 
         private bool Validarlongitud(string texto)
         {
-            if(texto.Length < 5)
+            if (texto.Length < 5)
             {
                 MessageBox.Show("Debe tener 5 digitos como minimo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false ;
+                return false;
             }
             return true;
         }
+
+        #region Paneltitulo
+
+
+        private void btncerrarmod_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnminimizarmod_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+
+        #endregion
+
+
     }
 }

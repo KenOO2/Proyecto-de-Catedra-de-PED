@@ -41,7 +41,7 @@ namespace proyecto
                     return;
                 }
 
-                string query = "SELECT IdProducto, NomProducto, Precio, Descuento FROM Productos";
+                string query = "SELECT \r\n    p.IdProducto,\r\n    p.NomProducto,\r\n    p.IdProveedor,\r\n    p.Precio,\r\n    p.Descuento,\r\n    pr.NomMarca AS NombreMarca\r\nFROM \r\n    Productos p\r\nINNER JOIN \r\n    Proveedores pr\r\nON \r\n    p.IdProveedor = pr.IdProveedor;\r\n";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
@@ -56,17 +56,20 @@ namespace proyecto
                             producto.Name = reader["NomProducto"].ToString();
 
                             decimal precio = Convert.ToDecimal(reader["Precio"]);
-
+                            
                             // lee el Descuento 
                             int descuento = 0;
                             if (int.TryParse(reader["Descuento"].ToString(), out int parsedDescuento))
                                 descuento = parsedDescuento;
 
-                            decimal precioConDescuento = precio - (precio * descuento / 100);
+                            decimal precioConDescuento =Math.Round(precio - (precio * descuento / 100),2);
+                            
+
 
                             producto.Datos = new Dictionary<string, object>()
                             {
                             {"Nombre", reader["NomProducto"].ToString()},
+                            {"Marca", reader["NombreMarca"].ToString()},
                             {"Precio", precio},
                             {"Porcentaje de Descuento", descuento},
                             {"Precio Con Descuento", precioConDescuento}
@@ -139,6 +142,7 @@ namespace proyecto
                         Datos = new Dictionary<string, object>
                 {
                     { "Nombre", dgvProductos.SelectedRows[0].Cells["Nombre"].Value },
+                    { "Marca", dgvProductos.SelectedRows[0].Cells["Marca"].Value },
                     { "Precio", dgvProductos.SelectedRows[0].Cells["Precio"].Value },
                     { "Porcentaje de Descuento", dgvProductos.SelectedRows[0].Cells["Porcentaje de Descuento"].Value },
                     { "Precio Con Descuento", dgvProductos.SelectedRows[0].Cells["Precio Con Descuento"].Value },
@@ -148,6 +152,7 @@ namespace proyecto
 
                     // Agregar el nodo a la lista compartida
                     CarritoData.ListaNodos.AñadirNodo(nodo);
+                    nudCantidad.Value = 1; // Resetear la cantidad a 1 después de agregar al carrito
 
                     MessageBox.Show("Producto agregado al carrito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                   

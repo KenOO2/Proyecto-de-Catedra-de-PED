@@ -18,7 +18,7 @@ namespace proyecto
             txtBuscar.Leave += txtBuscar_Leave;
 
         }
-        
+
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -127,7 +127,7 @@ namespace proyecto
                              SET NomProducto = @NomProducto, 
                                  IdProveedor = @IdProveedor, 
                                  Precio = @Precio, 
-                                 Descuento = @Descuento
+                                 Descuento = @Descuento,
                                  Stock = @Stock
                              WHERE IdProducto = @IdProducto";
 
@@ -146,7 +146,7 @@ namespace proyecto
                         if (filasAfectadas > 0)
                         {
                             MessageBox.Show("Producto actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            
+
                             //Actualizamos la lista si se pudo actualizar la bd 
                             decimal precioConDescuento = precio - (precio * descuento / 100);
                             Dictionary<string, object> NuevosDatos = new Dictionary<string, object>()
@@ -199,14 +199,14 @@ namespace proyecto
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (resultado == DialogResult.Yes)
+            try
             {
-                try
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    if (dataGridView1.SelectedRows.Count > 0)
-                    {
+                    DialogResult res = MessageBox.Show($"¿Está seguro de que desea eliminar el producto {dataGridView1.SelectedRows[0].Cells["Nombre"].Value}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                    if (res == DialogResult.Yes)
+                    {
                         int idProducto = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
 
 
@@ -221,15 +221,20 @@ namespace proyecto
 
                         MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
+                    if (res == DialogResult.No)
                     {
-                        MessageBox.Show("Por favor, seleccione un producto para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Eliminación cancelada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Por favor, seleccione un producto para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
         private void EliminarProductoDeBaseDeDatos(int idProducto)
@@ -296,6 +301,10 @@ namespace proyecto
                             {"Stock", Convert.ToInt32(reader["Stock"]) }
                             };
 
+                            if (Convert.ToInt32(reader["Stock"]) == 0)
+                            {
+                                MessageBox.Show($"El producto {producto.Name} con ID {producto.ID} no tiene stock disponible.\n Por favor, tomar acciones.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                             listaProductos.AñadirNodo(producto);
                         }
                     }
@@ -314,7 +323,7 @@ namespace proyecto
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 string criterio = txtBuscar.Text.Trim();
@@ -365,6 +374,11 @@ namespace proyecto
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
             listaProductos.LlenarDataGridView(dataGridView1);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
